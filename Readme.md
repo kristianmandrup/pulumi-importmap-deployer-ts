@@ -22,13 +22,36 @@ $ npm i
 $ pulumi up
 
 Previewing update (dev):
+     Type                   Name                    Plan       
+ +   pulumi:pulumi:Stack    importmap-deployer-dev  create     
+ +   └─ gcp:storage:Bucket  my-bucket               create     
+ 
+Resources:
+    + 2 to create
 
-     Type                   Name                    Plan       Info
- +   pulumi:pulumi:Stack    importmap-deployer-dev  create
-     └─ gcp:storage:Bucket  my-bucket
+Do you want to perform this update?
+> yes
+  no
+  details
+
+Do you want to perform this update? yes
+Updating (dev):
+     Type                   Name                    Status      
+ +   pulumi:pulumi:Stack    importmap-deployer-dev  created     
+ +   └─ gcp:storage:Bucket  my-bucket               created     
+ 
+Outputs:
+    bucketName: "gs://my-bucket-6a691e9"
+
+Resources:
+    + 2 created
+
+Duration: 11s
+
+Permalink: https://app.pulumi.com/username/importmap-deployer/dev/updates/1  
 ```
 
-## Troubleshoot
+## Troubleshooting
 
 `google: could not find default credentials`. See [application-default-credentials](https://developers.google.com/accounts/docs/application-default-credentials) for more information.
 
