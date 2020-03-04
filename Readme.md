@@ -32,40 +32,16 @@ Previewing update (dev):
 
 `google: could not find default credentials`. See [application-default-credentials](https://developers.google.com/accounts/docs/application-default-credentials) for more information.
 
-### From GCP console
+### Pulumi GCP setup
 
-[credentials serviceaccountkey](https://console.cloud.google.com/apis/credentials/serviceaccountkey)
+See [Pulumi GCP setup](https://www.pulumi.com/docs/intro/cloud-providers/gcp/setup/)
 
-Default service account
+The Pulumi Google Cloud Platform Provider needs to be configured with Google credentials before it can be used to create resources.
 
-![](./images/Create-GCP-Default-Service-Account.png)
+When developing locally, we recommend that you use gcloud login to configure your account credentials:
 
-Service account
-
-![](./images/Create-GCP-Service-Account.png)
-
-Service accounts
-
-![](./images/GCP-Service-Accounts.png)
-
-### using gcloud
-
-Create the service account. Replace [NAME] with a name for the service account.
-
-`gcloud iam service-accounts create [NAME]`
-
-Grant permissions to the service account. Replace [PROJECT_ID] with your project ID.
-
-`gcloud projects add-iam-policy-binding [PROJECT_ID] --member "serviceAccount:[NAME]@[PROJECT_ID].iam.gserviceaccount.com" --role "roles/owner"`
-
-Generate the key file. Replace [FILE_NAME] with a name for the key file.
-
-`gcloud iam service-accounts keys create [FILE_NAME].json --iam-account [NAME]@[PROJECT_ID].iam.gserviceaccount.com`
-
-Provide authentication credentials to your application code by setting the environment variable GOOGLE_APPLICATION_CREDENTIALS. Replace [PATH] with the file path of the JSON file that contains your service account key, and [FILE_NAME] with the filename. 
-
-`export GOOGLE_APPLICATION_CREDENTIALS="[PATH]"`
-
-For example:
-
-`export GOOGLE_APPLICATION_CREDENTIALS="/home/user/Downloads/[FILE_NAME].json"`
+```sh
+gcloud auth login
+gcloud config set project <YOUR_GCP_PROJECT_HERE>
+gcloud auth application-default login
+```
