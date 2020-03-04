@@ -20,5 +20,14 @@ $ npm i
 
 ```sh
 $ pulumi up
-# ...
+
+Previewing update (dev):
+
+     Type                   Name                    Plan       Info
+ +   pulumi:pulumi:Stack    importmap-deployer-dev  create
+     └─ gcp:storage:Bucket  my-bucket
 ```
+
+## Troubleshoot
+
+`google: could not find default credentials`. See [application-default-credentials](https://developers.google.com/accounts/docs/application-default-credentials) for more information.
