@@ -13,6 +13,8 @@ The stack will:
 
 The image `importmap-deployer` can be found in the folder of the same name.
 
+See also [gcr-terraform-mfe-importmap-deployer](https://github.com/kristianmandrup/gcr-terraform-mfe-importmap-deployer) which should set up the same (or a similar) stack using terraform
+
 ## Resources
 
 - [Google Cloud Run - Serverless Containers](https://www.pulumi.com/blog/google-cloud-run-serverless-containers/)
