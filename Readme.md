@@ -67,7 +67,7 @@ Previewing update (dev):
      Type                   Name                    Plan
  +   pulumi:pulumi:Stack    importmap-deployer-dev  create
  +   └─ gcp:storage:Bucket  my-bucket               create
- 
+
 Resources:
     + 2 to create
 
@@ -78,9 +78,9 @@ Do you want to perform this update?
 
 Do you want to perform this update? yes
 Updating (dev):
-     Type                   Name                    Status      
- +   pulumi:pulumi:Stack    importmap-deployer-dev  created     
- +   └─ gcp:storage:Bucket  my-bucket               created     
+     Type                   Name                    Status
+ +   pulumi:pulumi:Stack    importmap-deployer-dev  created
+ +   └─ gcp:storage:Bucket  my-bucket               created
 
 Outputs:
     bucketName: "gs://my-bucket-6a691e9"
@@ -106,6 +106,7 @@ Passing the `--secret` flag to the config set command encrypts the data and stor
 
 ```sh
 $ pulumi config set --secret dbPassword S3cr37
+# ...
 ```
 
 Alternatively add variables to the `Pulumi.yaml` file
