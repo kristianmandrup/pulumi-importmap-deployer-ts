@@ -7,7 +7,8 @@ const bucket = new gcp.storage.Bucket("importmap-bucket");
 
 const bucketAC = new gcp.storage.BucketAccessControl("full-access", {
   bucket: bucket.name,
-  entity: "allUsers"
+  entity: "allUsers",
+  role: "WRITER"
 })
 
 const enableCloudRun = new gcp.projects.Service("EnableCloudRun", {
