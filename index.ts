@@ -2,6 +2,11 @@ import * as pulumi from "@pulumi/pulumi";
 import * as gcp from "@pulumi/gcp";
 import * as docker from "@pulumi/docker";
 
+const config = new pulumi.Config();
+
+const imageVersion = config.require("version") || "latest"
+const serviceName = config.require("service_name") || "importmap-deployer-service"
+
 // Create a GCP resource (Storage Bucket)
 const bucket = new gcp.storage.Bucket("importmap-bucket");
 
@@ -19,13 +24,13 @@ const enableCloudRun = new gcp.projects.Service("EnableCloudRun", {
 const location = gcp.config.region || "us-central1";
 
 const importmapDeployerImage = new docker.Image("importmap-deployer", {
-  imageName: pulumi.interpolate`gcr.io/${gcp.config.project}/importmap-deployer:latest`,
+  imageName: pulumi.interpolate`gcr.io/${gcp.config.project}/importmap-deployer:${imageVersion}`,
   build: {
-      context: "./",
+    context: "./",
   },
 });
 
-const importmapDeployerService = new gcp.cloudrun.Service("importmap-deployer-service", {
+const importmapDeployerService = new gcp.cloudrun.Service(serviceName, {
   location,
   template: {
       spec: {

@@ -93,6 +93,54 @@ Duration: 11s
 Permalink: https://app.pulumi.com/username/importmap-deployer/dev/updates/1  
 ```
 
+### Pulumi Configuration
+
+To control the resources being built, use can use [Pulumi Config](https://www.pulumi.com/docs/intro/concepts/config/)
+
+```sh
+$ pulumi config set <key> [value]
+# ...
+```
+
+Passing the `--secret` flag to the config set command encrypts the data and stores the resulting ciphertext instead of plaintext.
+
+```sh
+$ pulumi config set --secret dbPassword S3cr37
+```
+
+Alternatively add variables to the `Pulumi.yaml` file
+
+To see the list of config variables
+
+```sh
+$ pulumi config
+KEY                        VALUE
+aws:region                 us-west-1
+dbPassword                 ********
+```
+
+To use from within the pulumi source code file `index.ts`
+
+```ts
+import * as pulumi from "@pulumi/pulumi";
+
+// create a config singleton containing all set config variables
+const config = new pulumi.Config();
+
+// use the config
+console.log(`Password: ${config.require("dbPassword")}`);
+```
+
+Currently the code uses the following config vars:
+
+- `version`
+- `service_name`
+
+```ts
+const imageVersion = config.require("version") || "latest"
+const serviceName = config.require("service_name") || "importmap-deployer-service"
+```
+
 ## Deploy image to service via gcloud
 
 Watch [Build and deploy with Cloud Run](https://www.youtube.com/watch?v=nJ0L28ZfmUA)
