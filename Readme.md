@@ -4,10 +4,27 @@ This Pulumi stack is designed to make it easy to set up GCP infrastructure for [
 
 The stack will:
 
-- Create a Storage Bucket
-- Create a Kubernetes cluster or Cloud Run configuration
+- Create a Google Cloud Run service named `importmap-deployer-service`
+- Define image `importmap-deployer` based on image `importmap-deployer:latest` that must exist in GCP container registry
+- Deploy image `importmap-deployer` in service `importmap-deployer-service`
+- Create a Storage Bucket `importmap-bucket`
+- Create policy to allow all users to access service
+- Create policy to allow all users to access bucket
 
-## Install
+The image `importmap-deployer` can be found in the folder of the same name.
+
+## Resources
+
+- [Google Cloud Run - Serverless Containers](https://www.pulumi.com/blog/google-cloud-run-serverless-containers/)
+- [GCP bucket access control](https://www.pulumi.com/docs/reference/pkg/nodejs/pulumi/gcp/storage/#BucketAccessControl)
+
+## Quickstart
+
+1. Install dependencies
+2. Push image to GCP Container Registry (via docker)
+3. Run `pulumi up` to create stack on GCP and deploy image on service
+
+### Install
 
 Install dependencies
 
@@ -16,15 +33,36 @@ $ npm i
 # dependencies
 ```
 
+### Push importmap-deployer image to GCP
+
+Define environment variables
+
+```sh
+$ EXPORT $GCR_PRJ_NAME=microfrontend-app
+$ EXPORT $GCR_CLUSTER_NAME=importmap-deployer
+# ...
+```
+
+Build image and push to GCP
+
+```sh
+$ docker build -t gcr.io/$GCR_NAME/$GCR_CLUSTER_NAME importmap-deployer
+# ...
+$ docker push gcr.io/$GCR_NAME/$GCR_CLUSTER_NAME
+# ...
+```
+
 ## Run
+
+Note: output when this pulumi stack only built a bucket
 
 ```sh
 $ pulumi up
 
 Previewing update (dev):
-     Type                   Name                    Plan       
- +   pulumi:pulumi:Stack    importmap-deployer-dev  create     
- +   └─ gcp:storage:Bucket  my-bucket               create     
+     Type                   Name                    Plan
+ +   pulumi:pulumi:Stack    importmap-deployer-dev  create
+ +   └─ gcp:storage:Bucket  my-bucket               create
  
 Resources:
     + 2 to create
@@ -39,7 +77,7 @@ Updating (dev):
      Type                   Name                    Status      
  +   pulumi:pulumi:Stack    importmap-deployer-dev  created     
  +   └─ gcp:storage:Bucket  my-bucket               created     
- 
+
 Outputs:
     bucketName: "gs://my-bucket-6a691e9"
 
@@ -64,7 +102,8 @@ The Pulumi Google Cloud Platform Provider needs to be configured with Google cre
 When developing locally, we recommend that you use gcloud login to configure your account credentials:
 
 ```sh
-gcloud auth login
-gcloud config set project <YOUR_GCP_PROJECT_HERE>
-gcloud auth application-default login
+$ gcloud auth login
+$ gcloud config set project <YOUR_GCP_PROJECT_HERE>
+$ gcloud auth application-default login
+# ...
 ```
