@@ -144,17 +144,19 @@ const serviceName = config.require("service_name") || "importmap-deployer-servic
 
 ## Deploy image to service via gcloud
 
-Watch [Build and deploy with Cloud Run](https://www.youtube.com/watch?v=nJ0L28ZfmUA)
+You can use this step to deploy a new image to your GCR service, such as when you update the `conf.js` file
 
 ```sh
 $ EXPORT IMG_TAG=gcr.io/$GCR_NAME/$GCR_CLUSTER_NAME
 $ gcloud builds submit -t $IMG_TAG
 # ...
-$ gcloud beta run deploy --image $IMG_TAG
+$ gcloud run deploy --image $IMG_TAG
 # returns url of running service
 ```
 
 Open the url returned by the deploy command in a browser
+
+Watch [Build and deploy with Cloud Run](https://www.youtube.com/watch?v=nJ0L28ZfmUA)
 
 ## Troubleshooting
 
