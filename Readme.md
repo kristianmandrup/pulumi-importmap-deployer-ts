@@ -1,5 +1,7 @@
 # Pulumi stack for importmap deployer on GCP
 
+The importmap deployer is a service required for single-spa Micro Frontends to deploy importmaps
+
 This Pulumi stack is designed to make it easy to set up GCP infrastructure for [importmap-deployer](https://github.com/single-spa/import-map-deployer)
 
 The stack will:
