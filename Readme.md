@@ -91,6 +91,20 @@ Duration: 11s
 Permalink: https://app.pulumi.com/username/importmap-deployer/dev/updates/1  
 ```
 
+## Deploy image to service via gcloud
+
+Watch [Build and deploy with Cloud Run](https://www.youtube.com/watch?v=nJ0L28ZfmUA)
+
+```sh
+$ EXPORT IMG_TAG=gcr.io/$GCR_NAME/$GCR_CLUSTER_NAME
+$ gcloud builds submit -t $IMG_TAG
+# ...
+$ gcloud beta run deploy --image $IMG_TAG
+# returns url of running service
+```
+
+Open the url returned by the deploy command in a browser
+
 ## Troubleshooting
 
 `google: could not find default credentials`. See [application-default-credentials](https://developers.google.com/accounts/docs/application-default-credentials) for more information.
