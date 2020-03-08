@@ -1,6 +1,6 @@
-# live-import-map-deployer
+# import-map-deployer
 
-Sample repo to demonstrate how to extend the Docker Hub image `singlespa/import-map-deployer`.
+Repo with `import-map-deployer` image that extends the official `singlespa` Docker Hub image `singlespa/import-map-deployer`.
 The image contains a sample `conf.js` config file used when invoking `import-map-deployer`.
 
 ```sh
