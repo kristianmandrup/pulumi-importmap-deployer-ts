@@ -36,6 +36,7 @@ The Pulumi stack is converted to a Terraform template, so setting the `PORT` env
 
 ```sh
 $ export PORT=5000
+$ export TF_PORT=5000
 # ...
 ```
 
