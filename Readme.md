@@ -23,6 +23,25 @@ See also [gcr-terraform-mfe-importmap-deployer](https://github.com/kristianmandr
 
 - [Google Cloud Run - Serverless Containers](https://www.pulumi.com/blog/google-cloud-run-serverless-containers/)
 - [GCP bucket access control](https://www.pulumi.com/docs/reference/pkg/nodejs/pulumi/gcp/storage/#BucketAccessControl)
+- [Cloud run container contract](https://cloud.google.com/run/docs/reference/container-contract)
+
+Terraform
+
+- [Issue: Cloud Run customized container port](https://github.com/terraform-providers/terraform-provider-google/issues/5539)
+- [Release notes on customizing container port](https://cloud.google.com/run/docs/release-notes#January_07_2020)
+
+Cloud Run exposes the service on port `8080` by default 
+
+The Pulumi stack is converted to a Terraform template, so setting the `PORT` env variable might work:
+
+```sh
+$ export PORT=5000
+# ...
+```
+
+You can also [Set ENV variables for containers](https://cloud.google.com/compute/docs/containers/configuring-options-to-run-containers#setting_environment_variables) manually via the GCP console.
+
+A fix to [import-map-deployer - issue #34](https://github.com/single-spa/import-map-deployer/issues/34) will allow the port exposed by `importmap-deployer` to be customized (currently hard-coded to port `5000`)
 
 ## Quickstart
 
