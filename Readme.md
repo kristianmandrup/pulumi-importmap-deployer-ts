@@ -123,6 +123,7 @@ Updating (dev):
 
 Outputs:
     bucketName: "gs://my-bucket-6a691e9"
+    serviceURL: "35.188.106.170:5000"
 
 Resources:
     + 2 created
@@ -130,6 +131,21 @@ Resources:
 Duration: 11s
 
 Permalink: https://app.pulumi.com/username/importmap-deployer/dev/updates/1  
+```
+
+Now set the `SERVICE_URL` ENV variable to point to the service url
+
+```sh
+$ EXPORT SERVICE_URL=35.188.106.170:5000
+```
+
+Go to the bucket created and upload an initial empty `importmap.json`
+
+Now call the service endpoint and patch the importmap with an entry to add
+
+```sh
+$ http PATCH $SERVICE_URL/services\?env=prod service=react url=https://cdn.jsdelivr.net/npm/react/umd/react.development.js
+# ...
 ```
 
 ### Pulumi Configuration
