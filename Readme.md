@@ -27,8 +27,9 @@ See also [gcr-terraform-mfe-importmap-deployer](https://github.com/kristianmandr
 ## Quickstart
 
 1. Install dependencies
-2. Push image to GCP Container Registry (via docker)
-3. Run `pulumi up` to create stack on GCP and deploy image on service
+2. Configure `importmap-deployer`
+3. Push image to GCP Container Registry (via docker)
+4. Run `pulumi up` to create stack on GCP and deploy image on service
 
 ### Install
 
@@ -37,6 +38,17 @@ Install dependencies
 ```sh
 $ npm i
 # dependencies
+```
+
+### Configure importmap-deployer
+
+Edit the `conf.js` file of the image to point to bucket entries.
+Each location entry should point to an actual storage bucket entry on GCP which contains an importmap JSON file.
+
+```js
+  locations: {
+    reactMf: 'google://react.microfrontends.app/importmap.json',
+  }
 ```
 
 ### Push importmap-deployer image to GCP
@@ -56,17 +68,6 @@ $ docker build -t gcr.io/$GCR_NAME/$GCR_CLUSTER_NAME importmap-deployer
 # ...
 $ docker push gcr.io/$GCR_NAME/$GCR_CLUSTER_NAME
 # ...
-```
-
-### Configuring importmap-deployer
-
-Edit the `conf.js` file of the image to point to bucket entries.
-Each location entry should point to an actual storage bucket entry on GCP which contains an importmap JSON file.
-
-```js
-  locations: {
-    reactMf: 'google://react.microfrontends.app/importmap.json',
-  }
 ```
 
 ## Run
@@ -129,7 +130,7 @@ To see the list of config variables
 ```sh
 $ pulumi config
 KEY                        VALUE
-aws:region                 us-west-1
+region                     us-west-1
 dbPassword                 ********
 ```
 
