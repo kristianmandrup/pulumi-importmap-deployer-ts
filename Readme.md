@@ -4,6 +4,8 @@ The importmap deployer is a service required for single-spa Micro Frontends to d
 
 This Pulumi stack is designed to make it easy to set up GCP infrastructure for [importmap-deployer](https://github.com/single-spa/import-map-deployer)
 
+Watch [Deploying Microfrontends Part 1 - Import Map Deployer](https://www.youtube.com/watch?v=QHunH3MFPZs&list=PLLUD8RtHvsAOhtHnyGx57EYXoaNsxGrTU&index=5)
+
 The stack will:
 
 - Create a Google Cloud Run service named `importmap-deployer-service`
