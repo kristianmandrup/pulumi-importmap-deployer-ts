@@ -56,6 +56,17 @@ $ docker push gcr.io/$GCR_NAME/$GCR_CLUSTER_NAME
 # ...
 ```
 
+### Configuring importmap-deployer
+
+Edit the `conf.js` file of the image to point to bucket entries.
+Each location entry should point to an actual storage bucket entry on GCP which contains an importmap JSON file.
+
+```js
+  locations: {
+    reactMf: 'google://react.microfrontends.app/importmap.json',
+  }
+```
+
 ## Run
 
 Note: output when this pulumi stack only built a bucket

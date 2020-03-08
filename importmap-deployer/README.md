@@ -8,4 +8,15 @@ Contains a sample `conf.js` used when invoking `import-map-deployer`:
 $ import-map-deployer conf.js
 ```
 
-Clone this repo and create your own `conf.js` file
+Clone this repo and create your own `conf.js` file where location entries point to actual GCP storage entries.
+
+```js
+{
+  //...
+  locations: {
+    reactMf: 'google://react.microfrontends.app/importmap.json',
+    //...
+  }
+}  
+```
+
