@@ -3,8 +3,17 @@
 Repo with `import-map-deployer` image that extends the official `singlespa` Docker Hub image `singlespa/import-map-deployer`.
 The image contains a sample `conf.js` config file used when invoking `import-map-deployer`.
 
+By default the web server listens to port `5000`
+
 ```sh
 $ import-map-deployer conf.js
+# ...
+```
+
+To run web server with custom port
+
+```sh
+$ PORT=8080 import-map-deployer conf.js
 # ...
 ```
 

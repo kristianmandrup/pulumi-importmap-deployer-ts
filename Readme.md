@@ -42,8 +42,6 @@ $ export TF_PORT=5000
 
 You can also [Set ENV variables for containers](https://cloud.google.com/compute/docs/containers/configuring-options-to-run-containers#setting_environment_variables) manually via the GCP console.
 
-A fix to [import-map-deployer - issue #34](https://github.com/single-spa/import-map-deployer/issues/34) will allow the port exposed by `importmap-deployer` to be customized (currently hard-coded to port `5000`)
-
 ## Quickstart
 
 1. Install dependencies
@@ -87,6 +85,13 @@ Build image and push to GCP
 $ docker build -t gcr.io/$GCR_NAME/$GCR_CLUSTER_NAME importmap-deployer
 # ...
 $ docker push gcr.io/$GCR_NAME/$GCR_CLUSTER_NAME
+# ...
+```
+
+To set custom container port `8080` (default for Cloud Run service):
+
+```sh
+$ docker build --container-port=8080 -t gcr.io/$GCR_NAME/$GCR_CLUSTER_NAME importmap-deployer
 # ...
 ```
 
