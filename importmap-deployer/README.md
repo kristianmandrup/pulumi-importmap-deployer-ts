@@ -23,7 +23,7 @@ Clone this repo and create your own `conf.js` file where location entries point 
 {
   //...
   locations: {
-    reactMf: 'google://react.microfrontends.app/importmap.json',
+    reactMf: 'gs://react.microfrontends.app/importmap.json',
     //...
   }
 }  

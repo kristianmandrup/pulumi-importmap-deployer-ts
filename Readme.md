@@ -25,22 +25,9 @@ See also [gcr-terraform-mfe-importmap-deployer](https://github.com/kristianmandr
 - [GCP bucket access control](https://www.pulumi.com/docs/reference/pkg/nodejs/pulumi/gcp/storage/#BucketAccessControl)
 - [Cloud run container contract](https://cloud.google.com/run/docs/reference/container-contract)
 
-Terraform
+Cloud Run exposes the service on port `8080` by default.
 
-- [Issue: Cloud Run customized container port](https://github.com/terraform-providers/terraform-provider-google/issues/5539)
-- [Release notes on customizing container port](https://cloud.google.com/run/docs/release-notes#January_07_2020)
-
-Cloud Run exposes the service on port `8080` by default 
-
-The Pulumi stack is converted to a Terraform template, so setting the `PORT` env variable might work:
-
-```sh
-$ export PORT=5000
-$ export TF_PORT=5000
-# ...
-```
-
-You can also [Set ENV variables for containers](https://cloud.google.com/compute/docs/containers/configuring-options-to-run-containers#setting_environment_variables) manually via the GCP console.
+You can [Set ENV variables for containers](https://cloud.google.com/compute/docs/containers/configuring-options-to-run-containers#setting_environment_variables)
 
 ## Quickstart
 
@@ -65,7 +52,7 @@ Each location entry should point to an actual storage bucket entry on GCP which 
 
 ```js
   locations: {
-    reactMf: 'google://react.microfrontends.app/importmap.json',
+    reactMf: 'gs://react.microfrontends.app/importmap.json',
   }
 ```
 
@@ -137,6 +124,7 @@ Now set the `SERVICE_URL` ENV variable to point to the service url
 
 ```sh
 $ EXPORT SERVICE_URL=35.188.106.170:5000
+# ...
 ```
 
 Go to the bucket created and upload an initial empty `importmap.json`
@@ -147,6 +135,10 @@ Now call the service endpoint and patch the importmap with an entry to add
 $ http PATCH $SERVICE_URL/services\?env=prod service=react url=https://cdn.jsdelivr.net/npm/react/umd/react.development.js
 # ...
 ```
+
+## Continuos Integration (CI)
+
+See samples of CI configurations in [ci-for-importmap-deployer](https://github.com/single-spa/import-map-deployer/examples/ci-for-importmap-deployer)
 
 ### Pulumi Configuration
 
