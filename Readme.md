@@ -140,6 +140,8 @@ $ http PATCH $SERVICE_URL/services\?env=prod service=react url=https://cdn.jsdel
 
 See samples of CI configurations in [ci-for-importmap-deployer](https://github.com/single-spa/import-map-deployer/examples/ci-for-importmap-deployer)
 
+Watch [Deploying Microfrontends Part 2 - CI for in-browser modules](https://www.youtube.com/watch?v=nC7rpDXa4B8&list=PLLUD8RtHvsAOhtHnyGx57EYXoaNsxGrTU&index=6)
+
 ### Pulumi Configuration
 
 To control the resources being built, use can use [Pulumi Config](https://www.pulumi.com/docs/intro/concepts/config/)
